@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Example</title>
+    <style>
+        #recordsTable {
+            width: 100%;
+             margin-top: 20px;
+        }
+
+        #recordsTable th, #recordsTable td {
+            border: 1px solid black;
+            padding: 8px; 
+            text-align:left;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="myForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="mobile">Mobile Number:</label>
+        <input type="tel" id="mobile" name="mobile" pattern="[0-9]{12}" placeholder="e.g., 888666625004" required><br>
+
+        <label for="hobbies">Hobbies (Select at least 2):</label><br>
+        <input type="checkbox" name="hobbies" value="Cricket">Cricket
+        <input type="checkbox"  name="hobbies" value="Football"> Football
+        <input type="checkbox" name="hobbies"  value="Reading books"> Reading books
+        <input type="checkbox" name="hobbies"  value="Watching Television"> Watching Television<br>
+
+        <button type="button" onclick="submitForm()">Submit Form</button>
+    </form>
+
+    <table id="recordsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Hobby</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="recordsBody">
+        </tbody>
+    </table>
+
+    <script>
+        function submitForm() {
+
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var mobile = document.getElementById('mobile').value;
+            var hobbies = Array.from(document.querySelectorAll('input[name="hobbies"]:checked')).map(h => h.value).join(',');
+
+            var id = new Date().getTime();
+
+            // new row created
+            var newRow = '<tr><td>' + id + '</td><td>' + name + '</td><td>' + email + '</td><td>' + mobile + '</td><td>' + hobbies + '</td><td><button onclick="editRecord(' + id + ')">Edit</button> <button onclick="deleteRecord(' + id + ')">Del</button></td></tr>';
+
+            // new row to record 
+            document.getElementById('recordsBody').innerHTML += newRow;
+
+            // Clear the form
+            document.getElementById('myForm').reset();
+        }
+    </script>
+</body>
+</html>
