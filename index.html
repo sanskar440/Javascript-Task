@@ -61,7 +61,7 @@
             var mobile = document.getElementById('mobile').value;
             var hobbies = Array.from(document.querySelectorAll('input[name="hobbies"]:checked')).map(h => h.value).join(',');
 
-            var id = new Date().getTime();
+            var id = new Date().getTime();// generating random unique id
 
             // new row created
             var newRow = '<tr><td>' + id + '</td><td>' + name + '</td><td>' + email + '</td><td>' + mobile + '</td><td>' + hobbies + '</td><td><button onclick="editRecord(' + id + ')">Edit</button> <button onclick="deleteRecord(' + id + ')">Del</button></td></tr>';
